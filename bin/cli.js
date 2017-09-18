@@ -1,0 +1,173 @@
+#!/usr/bin/env node
+
+"use strict"
+
+const program = require('commander')
+const pkg = require('../package.json')
+const path = require('path')
+const fs = require('fs')
+const util = require('./tool/util.js')
+const chalk = require('chalk')
+
+/**
+ * 描述
+ */
+program
+	.version(pkg.version)
+	.usage('[command]')
+	.description('snow 开发者命令行工具')
+
+/**
+ * 初始化新项目
+ */
+program
+	.command('init')
+	.description('初始化项目')
+	// .option('-n --value <a>') //cmd点后面的值得名字取决于 -- 后面的命名
+	.action(function(env,opt){
+		if(!util.isEmptyDir(util.USER_DIR)){
+			console.log(chalk.red('当前目录不为空，请在空目录执行该命令'))
+			return false
+		}
+		require('./init')()
+	});
+/**
+ * 创建组件
+ */
+program
+	.command('create')
+	.description('创建应用(app) 或 子组件(components)')
+	.action(function(env){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		require('./create')()
+		
+	});
+/**
+ * 启动server
+ */
+program
+	.command('server [env]')
+	.description('启动开发server')
+	.option('-p, --port <n>', '指定端口号', parseInt)
+	.action(function(env, options){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		require('./server')(options.port)
+	})
+
+/**
+ * 构建项目
+ */
+program
+	.command('build')
+	.description('构建项目')
+	.action(function(env){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		// 用于提示输出路径
+		require('./config/snowConfig')
+		require('./ugly')()
+		
+	});
+/**
+ * zip压缩构建后的项目
+ */
+program
+	.command('zip')
+	.description('zip压缩构建后的项目')
+	.action(function(env){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		require('./zip')()
+		
+	});
+/**
+ * 对zip后的项目进行dek加密
+ */
+program
+	.command('dek')
+	.description('对zip后的项目进行dek加密')
+	.action(function(env){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		require('./dek')()
+		
+	});
+
+/**
+ * 输入SDK
+ */
+program
+	.command('sdk')
+	.description('输出SDK')
+	.action(function(env){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		require('./sdk')()
+		
+	});
+
+/**
+ * 生成dll动态链接库
+ */
+program
+	.command('dll')
+	.description('生成dll动态链接库')
+	.action(function(env){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+		require('./dll')()
+	});
+
+/**
+ * 清除已构建的目录
+ */
+program
+	.command('clean [env]')
+	.description('清除已构建的目录')
+	.option('-a, --all [all]','清除所有已构建的文件')
+	.option('-z, --zip [zip]','清除已构建的zip文件')
+	.action(function(env, options){
+		if(!util.isRoot()){
+			console.log(chalk.red('请在项目根目录执行该命令'))
+			return false
+		}
+
+		require('./clean')(options.all, options.zip);
+		
+	});
+
+/**
+ * 其他命令处理
+ */
+program
+	.command('*')
+	.action(function(env){
+		console.log('deploying "%s"', env);
+		help();
+	});
+
+program.parse(process.argv);
+
+/**
+ * 当用户没有输入任何命令或选项的时候，自动提示帮助
+ */
+if (process.argv.slice(2).length == 0){
+	console.log(process.argv)
+	program.help();
+}

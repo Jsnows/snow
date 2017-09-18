@@ -1,0 +1,47 @@
+{
+  "name": "snow",
+  "version": "2.1.0",
+  "description": "snow's command-line tools",
+  "main": "./bin/cli.js",
+  "scripts": {},
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "snow"
+  ],
+  "bin": {
+    "snow": "bin/cli.js"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-zip": "^4.0.0",
+    "has-flag": "^2.0.0",
+    "inquirer": "^3.1.1",
+    "morgan": "^1.8.2",
+    "portfinder": "^1.0.13",
+    "shelljs": "^0.7.8"
+  },
+  "devDependencies": {
+    "add-asset-html-webpack-plugin": "^2.0.1",
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chunk-manifest-webpack-plugin": "^1.1.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "happypack": "^4.0.0-beta.1",
+    "html-webpack-plugin": "^2.28.0",
+    "inline-manifest-webpack-plugin": "^3.0.1",
+    "webpack": "^3.0.0",
+    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack-chunk-hash": "^0.4.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-dev-server": "^2.5.0",
+    "webpack-merge": "^4.1.0"
+  }
+}
