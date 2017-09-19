@@ -6,8 +6,8 @@
 
 <script>
     /**
-     *  引入工具类库 或 Native API
-     *  example : import widget from 'gapi/widget'
+     *  引入工具类库 
+     *  example : import apiName from 'api/apiName'
      */
     
     /**

@@ -9,12 +9,13 @@ import zepto from 'zepto'
  *  引入根组件
  */
 import App from './App'
-
+import router from './router'
 /**
  *  start
  */
 new Vue({
 	el: '#mountRoot',
 	store,
+	router,
 	components: { App }
 })

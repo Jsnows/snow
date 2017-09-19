@@ -16,7 +16,7 @@ function createApp(appName){
 	// 创建文件 
 	fs.mkdirSync(`${util.USER_DIR}/app/${appName}`)
 
-	~['html', 'js', 'store', 'vue'].map((v)=> {
+	~['html', 'js', 'store', 'vue','router'].map((v)=> {
 		// 读文件内容
 		let str = fs.readFileSync(`${util.TEMPLATES_DIR}/app.${v}`).toString();
 		// 文件名
@@ -27,6 +27,10 @@ function createApp(appName){
 				break;
 			case 'vue':
 				basestr = 'App.vue';
+				break;
+			case 'router':
+				basestr = 'router.js'
+				break;
 		}
 		// 写入文件
 		fs.writeFileSync(`${util.USER_DIR}/app/${appName}/${basestr}`, str, 'utf8');
