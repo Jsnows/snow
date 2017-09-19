@@ -90,35 +90,6 @@ program
 		require('./zip')()
 		
 	});
-/**
- * 对zip后的项目进行dek加密
- */
-program
-	.command('dek')
-	.description('对zip后的项目进行dek加密')
-	.action(function(env){
-		if(!util.isRoot()){
-			console.log(chalk.red('请在项目根目录执行该命令'))
-			return false
-		}
-		require('./dek')()
-		
-	});
-
-/**
- * 输入SDK
- */
-program
-	.command('sdk')
-	.description('输出SDK')
-	.action(function(env){
-		if(!util.isRoot()){
-			console.log(chalk.red('请在项目根目录执行该命令'))
-			return false
-		}
-		require('./sdk')()
-		
-	});
 
 /**
  * 生成dll动态链接库
@@ -134,23 +105,6 @@ program
 		require('./dll')()
 	});
 
-/**
- * 清除已构建的目录
- */
-program
-	.command('clean [env]')
-	.description('清除已构建的目录')
-	.option('-a, --all [all]','清除所有已构建的文件')
-	.option('-z, --zip [zip]','清除已构建的zip文件')
-	.action(function(env, options){
-		if(!util.isRoot()){
-			console.log(chalk.red('请在项目根目录执行该命令'))
-			return false
-		}
-
-		require('./clean')(options.all, options.zip);
-		
-	});
 
 /**
  * 其他命令处理
