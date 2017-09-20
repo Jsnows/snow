@@ -10,6 +10,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const os = require('os');
 const HappyPack  = require('happypack');
 const happThreadPool = HappyPack.ThreadPool({size: os.cpus().length}); // 采用多进程，进程数由CPU核数决定
+const ExtractTextPlugin = new require('extract-text-webpack-plugin');
 /**
  * 入口文件
  */
@@ -101,6 +102,18 @@ module.exports = {
           }
         ]
       },
+      {  
+        test: /\.css$/,                  
+        // 将样式抽取出来为独立的文件
+        loader: ExtractTextPlugin.extract({fallback:"style-loader", use:["css-loader","postcss-loader"]}),
+        exclude: /node_modules/
+      },
+      {  
+        test: /\.scss$/,                  
+        // 将样式抽取出来为独立的文件
+        use:['style-loader','css-loader','autoprefixer-loader','sass-loader'], 
+        exclude: /node_modules/
+      },    
       {
         test: /\.json$/,
         use: 'json-loader'

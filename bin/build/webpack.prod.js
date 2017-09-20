@@ -76,26 +76,6 @@ module.exports = Merge(CommonConfig, {
     new webpack.optimize.AggressiveMergingPlugin(),
     // 提取css
     new ExtractTextPlugin("../[name].[contenthash].css"),
-    // 编译css
-    new webpack.LoaderOptionsPlugin({
-      test:/\.vue$/,
-      options: {  
-         vue: {
-            loaders: {  
-               css: ExtractTextPlugin.extract({  
-               fallback:'vue-style-loader',   
-               use: [{
-                  loader: 'css-loader',
-                  options: {
-                    minimize: true
-                  }
-               }],  
-               publicPath:"static/", 
-             })
-           }
-         }  
-      }  
-    }),
     ...htmls
   ]
 })

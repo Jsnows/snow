@@ -45,25 +45,6 @@ module.exports = Merge(CommonConfig, {
     // new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     // new ExtractTextPlugin("../[name].[contenthash].css"),
-    new webpack.LoaderOptionsPlugin({
-      test:/\.vue$/,
-      options: {  
-         vue: {
-            loaders: {  
-               css: ExtractTextPlugin.extract({  
-               fallback:'vue-style-loader',   
-               use: [{
-                  loader: 'css-loader',
-                  options: {
-                    minimize: true
-                  }
-               }],  
-               publicPath:"/", 
-             })
-           }
-         }  
-      }  
-    }),
   ],
   devServer: {
     port: 3008,
