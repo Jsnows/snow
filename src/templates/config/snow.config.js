@@ -20,8 +20,6 @@ module.exports = {
 	],
 	// 输出目录的名称
 	outputName: 'output',
-	// 运行环境
-	env: 'hybrid', // web
 	// 是否压缩
 	zip: true,
 	// 是否启用热更新

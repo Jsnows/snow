@@ -41,8 +41,6 @@ function main() {
     fs.mkdirSync(`${util.USER_DIR}/app`);
     // 创建 components 目录
     fs.mkdirSync(`${util.USER_DIR}/components`);
-    // 创建 routers 目录
-    fs.mkdirSync(`${util.USER_DIR}/routers`);
     // 创建静态资源 static 目录以及css/images目录
     fs.mkdirSync(`${util.USER_DIR}/static`);
     fs.mkdirSync(`${util.USER_DIR}/static/css`);

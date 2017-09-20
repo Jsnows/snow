@@ -10,7 +10,7 @@ function main(){
 		type: 'list',
 		name: 'tplType',
 		message: '请选择要创建的模板类型',
-		choices: ['应用(app)', '子组件(components)','路由组件(routers)']
+		choices: ['应用(app)', '子组件(components)']
 	}
 	// 询问要创建组件还是页面
 	inquirer.prompt(list).then(function (answers) {
@@ -31,8 +31,6 @@ function main(){
 				createApp(componentsName)
 			}else if(tplType === '子组件(components)'){
 				createComponents(componentsName)
-			}else if(tplType === '路由组件(routers)'){
-				createRouters(componentsName)
 			}
 
 		})
