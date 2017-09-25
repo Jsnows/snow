@@ -113,7 +113,7 @@ program
 	.command('*')
 	.action(function(env){
 		console.log('deploying "%s"', env);
-		help();
+		program.help();
 	});
 
 program.parse(process.argv);
@@ -122,6 +122,5 @@ program.parse(process.argv);
  * 当用户没有输入任何命令或选项的时候，自动提示帮助
  */
 if (process.argv.slice(2).length == 0){
-
 	program.help();
 }
