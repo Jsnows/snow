@@ -108,6 +108,10 @@ module.exports = {
         loader: ExtractTextPlugin.extract({fallback:"style-loader", use:["css-loader","postcss-loader"]}),
         exclude: /node_modules/
       },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
+      },
       {  
         test: /\.scss$/,                  
         // 将样式抽取出来为独立的文件
