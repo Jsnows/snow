@@ -8,6 +8,7 @@ const path = require('path')
 const fs = require('fs')
 const util = require('./tool/util.js')
 const chalk = require('chalk')
+const inquirer = require('inquirer')
 
 /**
  * 描述
@@ -27,9 +28,21 @@ program
 	.action(function(env,opt){
 		if(!util.isEmptyDir(util.USER_DIR)){
 			console.log(chalk.red('当前目录不为空，请在空目录执行该命令'))
-			return false
+			let list = {
+				type: 'list',
+				name: 'tplType',
+				message: '是否还要继续初始化操作',
+				choices: ['是', '否']
+			}
+			inquirer.prompt(list).then((answers) => {
+				if(answers.tplType === '是'){
+					require('./init')()
+				}else if(answers.tplType === '否'){
+					console.log(chalk.green('结束初始化操作'))
+				}
+			})
 		}
-		require('./init')()
+		
 	});
 /**
  * 创建组件
