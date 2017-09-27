@@ -3,7 +3,6 @@
 const inquirer = require('inquirer')
 const createApp = require('../tool/createApp.js')
 const createComponents = require('../tool/createComponents.js')
-const createRouters = require('../tool/createRouter.js')
 
 function main(){
 	let list = {
