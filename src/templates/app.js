@@ -3,7 +3,6 @@
  */
 import Vue from 'vue'
 import store from './store'
-import zepto from 'zepto'
 
 /**
  *  引入根组件

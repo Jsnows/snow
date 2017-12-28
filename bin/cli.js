@@ -27,7 +27,6 @@ program
 	// .option('-n --value <a>') //cmd点后面的值得名字取决于 -- 后面的命名
 	.action(function(env,opt){
 		if(!util.isEmptyDir(util.USER_DIR)){
-			console.log(chalk.red('当前目录不为空，请在空目录执行该命令'))
 			let list = {
 				type: 'list',
 				name: 'tplType',
@@ -41,8 +40,9 @@ program
 					console.log(chalk.green('结束初始化操作'))
 				}
 			})
+		}else{
+			console.log(chalk.red('当前目录不为空，请在空目录执行该命令'))
 		}
-		
 	});
 /**
  * 创建组件

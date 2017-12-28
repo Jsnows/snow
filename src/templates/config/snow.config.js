@@ -8,7 +8,6 @@ module.exports = {
 		'./node_modules/vue/dist/vue.esm.js',
 		'./node_modules/es6-promise/dist/es6-promise.auto.js',
 		'vuex',
-		'zepto'
 	],
 	// 别名
 	alias: {
