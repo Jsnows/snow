@@ -3,6 +3,8 @@ module.exports = {
 	app: [
 		'index'
 	],
+	// 默认启动server打开的页面，只能设置一个，不设置则不打开
+	defaultPage:'',
 	// dll
 	dll: [
 		'./node_modules/vue/dist/vue.esm.js',
