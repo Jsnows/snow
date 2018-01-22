@@ -8,7 +8,7 @@ const portfinder = require('portfinder');
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const util = require('../tool/util.js');
 const snowConfig = require(`${util.SNOW_PATH}`);
-
+const opn = require('opn');
 let config = require('./webpack.dev');
 let defaultStatsOptions = {
   colors: true,
@@ -77,6 +77,9 @@ module.exports = function(port) {
         if (err) {
           console.log(err)
           return
+        }
+        if(snowConfig.defaultPage){
+          opn(`http://localhost:${port}/app/${snowConfig.defaultPage}/${snowConfig.defaultPage}.html`);
         }
         console.log(`Listening at http://localhost:${port}`)
       })

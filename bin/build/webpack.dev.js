@@ -21,19 +21,7 @@ CommonConfig.module.rules.push({
     }
   }
 });
-/**
- * [add hot]
- * @param  {[type]} snowConfig.hot [description]
- * @return {[type]}                 [description]
- */
-if(snowConfig.hot){
-    let polyfill = 'eventsource-polyfill';
-    let devClient = `${util.PROJECT_DIR}/bin/build/dev-client`;
-    Object.keys(CommonConfig.entry).forEach(function (name, i) {
-        let extras = i === 0 ? [polyfill, devClient] : [devClient]
-        CommonConfig.entry[name] = extras.concat(CommonConfig.entry[name])
-    });
-}
+
 /**
  * [config Merge]
  */
