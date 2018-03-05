@@ -5,8 +5,8 @@ const util = require('../tool/util.js');
 const chalk = require('chalk');
 const createApp = require('../tool/createApp.js');
 const createComponents = require('../tool/createComponents.js');
-const {spawn} = require('child_process');
-const inquirer = require('inquirer')
+const spawn = require('child_process').spawn;
+const inquirer = require('inquirer');
 const configDir = [
     'snow.config.js',  //项目配置文件
     'package.json',     //包文件

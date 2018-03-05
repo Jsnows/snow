@@ -11,9 +11,9 @@ const snowConfig = require(`${util.SNOW_PATH}`);
 const OUTPUT_DIR = `${util.USER_DIR}/${snowConfig.outputName}`;
 
 // 公共文件路径
-CommonConfig.output.publicPath = 'static/';
+// CommonConfig.output.publicPath = 'static/';
 // 输出文件名
-CommonConfig.output.filename = '[name].[hash].js';
+// CommonConfig.output.filename = 'js/[name].[hash].js';
 // css happypack
 CommonConfig.module.rules.push({
   test: /\.vue$/,
@@ -51,7 +51,7 @@ snowConfig.app.map((v) => {
       // 是否引入bundle文件
       chunks: ['bundle', v],
       // 
-      chunksSortMode: 'dependency',
+      // chunksSortMode: 'dependency',
       // html压缩配置
       minify: { removeComments: true, collapseWhitespace: true },
       inject: true
@@ -73,9 +73,30 @@ module.exports = Merge(CommonConfig, {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.optimize.AggressiveMergingPlugin(),
     // 提取css
-    new ExtractTextPlugin("../[name].[contenthash].css"),
+    new ExtractTextPlugin({
+      filename:"css/[name].css",
+      allChunks: true,
+    }),
+    new webpack.LoaderOptionsPlugin({
+      test:/\.vue$/,
+      options: {  
+         vue: {
+            loaders: {  
+               css: ExtractTextPlugin.extract({  
+               fallback:'vue-style-loader',   
+               use: [{
+                  loader: 'css-loader',
+                  options: {
+                    minimize: true
+                  }
+               }]
+             })
+           }
+         }  
+      }  
+    }),
     ...htmls
   ]
 })

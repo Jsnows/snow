@@ -39,11 +39,11 @@ let plugins = [
     manifest: require(`${util.USER_DIR}/dll/vendor-manifest.json`),
   }),
   /* 抽取出所有通用的部分 */
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'bundle',      // 需要注意的是，chunk的name不能相同！！！
-    filename: 'bundle.js',
-    minChunks: Math.ceil(snowConfig.app.length / 2),
-  }),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'bundle',      // 需要注意的是，chunk的name不能相同！！！
+  //   filename: 'common/bundle.js',
+  //   minChunks: Math.ceil(snowConfig.app.length / 2),
+  // }),
   /* 插入Dll文件 */
   new AddAssetHtmlPlugin({ 
     filepath: require.resolve(`${util.USER_DIR}/dll/vendor.dll.js`), 
@@ -76,9 +76,9 @@ if (snowConfig.analyzer) {
 module.exports = {
   entry,
   output: {
-    path: path.join(OUTPUT_DIR, '/static'),
-    filename: "[name].js",
-    chunkFilename: "[name].chunk.js",
+    path: path.join(OUTPUT_DIR),
+    filename: `js/[name].js`,
+    chunkFilename: `js/[name].chunk.js`,
     publicPath: '/',
     sourceMapFilename: '[name].map',
   },
@@ -87,7 +87,6 @@ module.exports = {
     extensions: ['.vue', '.js', '.json'],
     modules: [`${util.PROJECT_DIR}/node_modules`, `${util.USER_DIR}/node_modules`]
   },
-
   module: {
     rules: [
       {
@@ -96,8 +95,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 1000,
-              name: '[name].[ext]?[hash:7]'
+              limit: 1000
             }
           }
         ]
@@ -117,7 +115,15 @@ module.exports = {
         // 将样式抽取出来为独立的文件
         use:['style-loader','css-loader','autoprefixer-loader','sass-loader'], 
         exclude: /node_modules/
-      },    
+      },
+      {
+        test: /iview.src.*?js$/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(less|css)$/,
+        use:[ 'style-loader','css-loader','less-loader'],
+      },  
       {
         test: /\.json$/,
         use: 'json-loader'

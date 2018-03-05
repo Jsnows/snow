@@ -26,7 +26,7 @@ program
 	.description('初始化项目')
 	// .option('-n --value <a>') //cmd点后面的值得名字取决于 -- 后面的命名
 	.action(function(env,opt){
-		if(util.isEmptyDir(util.USER_DIR)){
+		if(!util.isEmptyDir(util.USER_DIR)){
 			let list = {
 				type: 'list',
 				name: 'tplType',
