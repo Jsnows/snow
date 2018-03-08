@@ -21,7 +21,13 @@ CommonConfig.module.rules.push({
     }
   }
 });
-
+CommonConfig.output = {
+  path: path.join(OUTPUT_DIR,'/static'),
+  filename: `[name].js`,
+  chunkFilename: `[name].chunk.js`,
+  publicPath: '/',
+  sourceMapFilename: '[name].map',
+}
 /**
  * [config Merge]
  */
