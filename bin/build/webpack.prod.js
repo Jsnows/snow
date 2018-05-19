@@ -32,7 +32,8 @@ if (snowConfig.zip !== false) {
       },
       compress: {
         screw_ie8: true,
-        warnings: false
+        warnings: false,
+        drop_console: true,
       },
       comments: false
     })
