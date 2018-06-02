@@ -58,7 +58,7 @@ module.exports = function(port) {
         //      input: '/app/cert-list/cert-list.html?' ]
         if (regexp instanceof Array && regexp[1] === regexp[2] && snowConfig.app.indexOf(regexp[2]) !== -1) {
           let str = fs.readFileSync(`${util.USER_DIR}${regexp[0]}`).toString();
-          str = str.replace('</body>', `${genScipt(['vendor.dll', 'bundle' ,regexp[2]])}</body>`);
+          str = str.replace('</body>', `${genScipt(['vendor.dll' ,regexp[2]])}</body>`);
           res.send(str);
         }
         next();
