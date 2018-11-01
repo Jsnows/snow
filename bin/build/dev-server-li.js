@@ -79,7 +79,7 @@ module.exports = function(port) {
       return
     }
     if(snowConfig.defaultPage){
-      opn(`http://localhost:${port}/app/${snowConfig.defaultPage}/${snowConfig.defaultPage}.html`);
+      opn(`http://127.0.0.1:${port}/app/${snowConfig.defaultPage}/${snowConfig.defaultPage}.html`);
     }
     console.log(`Listening at http://localhost:${port}`)
   })
