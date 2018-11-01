@@ -27,4 +27,6 @@ module.exports = {
 	hot: false,
 	// webpack打包分析
 	analyzer: false,
+	// 本地server端口
+	serverPort: 8000
 }
