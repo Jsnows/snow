@@ -41,8 +41,6 @@ module.exports = Merge(CommonConfig, {
     // new ExtractTextPlugin("../[name].[contenthash].css"),
   ],
   devServer: {
-    port: 3008,
-    host: 'localhost',
     historyApiFallback: true,
     noInfo: false,
     stats: 'minimal',
