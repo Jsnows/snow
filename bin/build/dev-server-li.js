@@ -70,7 +70,12 @@ module.exports = function(port) {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: "/",
     // lazy: true,
-    stats: defaultStatsOptions
+    stats: defaultStatsOptions,
+    watchOptions: {
+      ignored: /node_modules/,
+      poll: 1000,
+      aggregeateTimeout:500
+    }
   }));
   app.listen(port, function (err) {
     if (err) {
