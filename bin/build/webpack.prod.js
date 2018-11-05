@@ -46,7 +46,7 @@ let htmls = [];
 snowConfig.app.map((v) => {
     htmls.push(new HtmlWebpackPlugin({
       // 文件名
-      filename: path.join(OUTPUT_DIR, `/${v}.html`),
+      filename: path.join(OUTPUT_DIR, `/app/${v}/${v}.html`),
       // 模板文件名
       template: path.join(util.USER_DIR, `/app/${v}/${v}.html`),
       // 是否引入bundle文件

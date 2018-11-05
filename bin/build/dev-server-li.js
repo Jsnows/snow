@@ -4,7 +4,6 @@ const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
 const webpack = require('webpack');
-const portfinder = require('portfinder');
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const util = require('../tool/util.js');
 const snowConfig = require(`${util.SNOW_PATH}`);
