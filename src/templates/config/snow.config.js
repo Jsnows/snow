@@ -28,5 +28,7 @@ module.exports = {
 	// webpack打包分析
 	analyzer: false,
 	// 本地server端口
-	serverPort: 8000
+	serverPort: 8000,
+	// 打包资源的路径 '/'服务器路径 './'相对路径
+	publicPath: '/'
 }

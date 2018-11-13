@@ -79,7 +79,7 @@ module.exports = {
     path: path.join(OUTPUT_DIR),
     filename: `js/[name].js`,
     chunkFilename: `js/[name].chunk.js`,
-    publicPath: '/',
+    publicPath: snowConfig.publicPath || '/',
     sourceMapFilename: '[name].map',
   },
   resolve: {
