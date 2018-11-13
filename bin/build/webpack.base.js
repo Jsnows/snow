@@ -70,6 +70,13 @@ if (snowConfig.analyzer) {
     })
   )
 }
+let node = {};
+if(snowConfig.appType == 'electron'){
+  node = {
+    __dirname: true,
+    __filename: true
+  }
+}
 /**
  * [config]
  */
@@ -135,5 +142,6 @@ module.exports = {
       }
     ]
   },
-  plugins
+  plugins,
+  node
 }

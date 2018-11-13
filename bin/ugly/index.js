@@ -9,12 +9,57 @@ const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 let loader = require('../tool/loader')
 let prodConfig = require('../build/webpack.prod.js')
 let compiler = webpack(prodConfig)
+let mainConfig = require('../build/webpack.main.js');
+let mainCompiler = webpack(mainConfig);
 
 if(!snowConfig.outputName || snowConfig.outputName == ''){
     snowConfig.outputName = 'output'
 }
 
-function main(){
+function electronPacker(){
+	loader.start();
+	rm('-rf', `${util.USER_DIR}/${snowConfig.outputName}`);
+	try{
+		fs.mkdirSync(`${util.USER_DIR}/${snowConfig.outputName}`);
+	}catch(e){
+        console.log(e);
+    }
+    // 输出打包进度
+    compiler.apply(new ProgressPlugin(function(percentage, msg) {
+        console.log(chalk.green(
+            `已构建${chalk.red(Math.floor(percentage*100) + '%')} ${msg}`
+        ));
+    }));
+    compiler.run((err, stats) => {
+        loader.end('*');
+        if(err) {
+            console.log('webpack:build', err);
+            return false;
+        } else {
+            console.log('[webpack:build]', stats.toString({
+                chunks: false,
+                colors: true
+            }))
+            // 向构建后的项目中添加必要的文件
+            // 添加 cache.manifest 文件
+            mainCompiler.run(function(err,stats){
+                if(err){
+                    console.log('webpack:buildMain', err);
+                }else{
+                    console.log('[webpack:buildMain]', stats.toString({
+                        chunks: false,
+                        colors: true
+                    }))
+                    console.log(chalk.green('build end'))
+                    process.exit(0)
+                }
+            })
+        }
+    })
+
+}
+
+function webPacker(){
 	loader.start();
 	rm('-rf', `${util.USER_DIR}/${snowConfig.outputName}`);
 	try{
@@ -29,7 +74,6 @@ function main(){
             `已构建${chalk.red(Math.floor(percentage*100) + '%')} ${msg}`
         ));
     }));
-
     compiler.run((err, stats) => {
         loader.end('*');
         if(err) {
@@ -40,15 +84,19 @@ function main(){
                 chunks: false,
                 colors: true
             }))
-
             // 向构建后的项目中添加必要的文件
             // 添加 cache.manifest 文件
-            
             console.log(chalk.green('build end'))
             process.exit(0)
         }
     })
 
 }
-
-module.exports = main
+function pack(){
+    if(snowConfig.appType == 'electron'){
+        electronPacker();
+    }else{
+        webPacker();
+    }
+}
+module.exports = pack

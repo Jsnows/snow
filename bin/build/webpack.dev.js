@@ -25,6 +25,9 @@ CommonConfig.output = {
   publicPath: '/',
   sourceMapFilename: '[name].map',
 }
+if(snowConfig.appType =='electron'){
+  CommonConfig.target = 'electron-renderer'
+}
 /**
  * [config Merge]
  */

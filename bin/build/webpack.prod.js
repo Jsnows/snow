@@ -58,6 +58,9 @@ snowConfig.app.map((v) => {
       inject: true
     }));
 });
+if(snowConfig.appType == 'electron'){
+  CommonConfig.target = 'electron-main';
+}
 /**
  * [config Merge]
  */
