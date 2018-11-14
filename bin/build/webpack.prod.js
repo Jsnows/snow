@@ -80,7 +80,7 @@ module.exports = Merge(CommonConfig, {
     // new webpack.optimize.AggressiveMergingPlugin(),
     // 提取css
     new ExtractTextPlugin({
-      filename:"css/[name].css",
+      filename:"css/[name][hash].css",
       allChunks: true,
     }),
     new webpack.LoaderOptionsPlugin({

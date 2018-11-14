@@ -84,7 +84,7 @@ module.exports = {
   entry,
   output: {
     path: path.join(OUTPUT_DIR),
-    filename: `js/[name].js`,
+    filename: `js/[name][hash].js`,
     chunkFilename: `js/[name].chunk.js`,
     publicPath: snowConfig.publicPath || '/',
     sourceMapFilename: '[name].map',
