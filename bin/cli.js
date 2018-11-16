@@ -26,23 +26,38 @@ program
 	.description('初始化项目')
 	// .option('-n --value <a>') //cmd点后面的值得名字取决于 -- 后面的命名
 	.action(function(env,opt){
-		if(!util.isEmptyDir(util.USER_DIR)){
-			let list = {
-				type: 'list',
-				name: 'tplType',
-				message: '当前目录不为空，是否还要继续初始化操作',
-				choices: ['是', '否']
-			}
-			inquirer.prompt(list).then((answers) => {
-				if(answers.tplType === '是'){
-					require('./init')();
-				}else if(answers.tplType === '否'){
-					console.log(chalk.green('结束初始化操作'))
-				}
-			})
-		}else{
-			require('./init')();
+		let done = null;
+		let next = new Promise((resolve,reject)=>{
+			done = resolve;
+		})
+		let list = {
+			type: 'list',
+			name: 'appType',
+			message: '请选择要创建的应用',
+			choices: ['web', 'electron']
 		}
+		inquirer.prompt(list).then(function(ans){
+			done(ans.appType)
+		})
+		next.then(appType => {
+			if(!util.isEmptyDir(util.USER_DIR)){
+				let list = {
+					type: 'list',
+					name: 'tplType',
+					message: '当前目录不为空，是否还要继续初始化操作',
+					choices: ['是', '否']
+				}
+				inquirer.prompt(list).then((answers) => {
+					if(answers.tplType === '是'){
+						require('./init')(appType);
+					}else if(answers.tplType === '否'){
+						console.log(chalk.green('结束初始化操作'))
+					}
+				})
+			}else{
+				require('./init')(appType);
+			}
+		})
 	});
 /**
  * 创建组件

@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const util = require('../tool/util.js');
 const snowConfig = require(`${util.SNOW_PATH}`);
+const packJson = require(`${util.USER_DIR}/package.json`);
 const opn = require('opn');
 let config = require('./webpack.dev');
 const { spawn } = require('child_process');
@@ -82,32 +83,43 @@ module.exports = function(port) {
     }));
     if(snowConfig.appType == 'electron'){
         let electronProcess = null;
-        let manualRestart = false
-        function startElectron () {
-            electronProcess = spawn(electron, ['--inspect=5858', path.join(util.USER_DIR, './output/main.js')])
-        
+        let manualRestart = false;
+        function startElectron (){
+            electronProcess = spawn(electron, ['--inspect=5858', path.join(util.USER_DIR, packJson.main)]);
             electronProcess.stdout.on('data', data => {
-                console.log(data)
+                console.log('data:')
+                console.log(String(data))
             })
             electronProcess.stderr.on('data', data => {
-                console.log(data)
+                console.log('error:')
+                console.log(String(data))
             })
             electronProcess.on('close', () => {
                 if (!manualRestart) process.exit()
             })
         }
         let mainCompiler = webpack(require('./webpack.main.js'));
-        mainCompiler.plugin('watch-run', (compilation, done) => {
-            console.log('complier....');
-            done();
-        })
+        let preventShake = null;
+        let repeatCompiler = false;
+        let compilerNum = 0;
         mainCompiler.watch({}, (err, stats) => {
             if (err) {
                 console.log(err)
+                console.log(stats)
                 return
             }
+            compilerNum++;
+            if(compilerNum > 1){
+                repeatCompiler = true;
+                clearInterval(preventShake);
+                preventShake = setTimeout(()=>{
+                    repeatCompiler = false;
+                },500)
+            }
+            if(repeatCompiler) return;
+            console.log('change')
             if (electronProcess && electronProcess.kill) {
-                console.log('kill---------cui')
+                console.log('kill')
                 manualRestart = true;
                 process.kill(electronProcess.pid)
                 electronProcess = null

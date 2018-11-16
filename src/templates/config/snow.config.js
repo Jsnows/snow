@@ -29,6 +29,19 @@ module.exports = {
 	analyzer: false,
 	// 本地server端口
 	serverPort: 8000,
-	// 打包资源的路径 '/'服务器路径 './'相对路径
-	publicPath: '/'
+	// 打包资源的路径 '/'服务器路径 './'相对路径 （web应用使用/ electron使用./）
+	publicPath: '/',
+	// 需要打包的应用类型
+	appType: 'electron',
+	// electron打包配置
+	electronPackConfig: {
+		arch: 'x64',
+		asar: false,
+		dir: `${__dirname}`,
+		out: `${__dirname}/output`,
+		//   icon: path.join(__dirname, '../build/icons/icon'),
+		ignore: /(^\/(app|components|static|dll|node_modules|\.[a-z]+|README))|main\.js/,
+		overwrite: true,
+		platform: 'darwin'
+	}
 }

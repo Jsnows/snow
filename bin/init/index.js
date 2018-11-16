@@ -19,7 +19,7 @@ const disShowConfig = [
     'eslintrc.js',        //eslint 配置文件
 ]
 
-function main() {
+function main(type) {
 	console.log(chalk.green('初始化项目结构'));
     // 写入显式配置文件
     configDir.map((dirName) => {
@@ -45,6 +45,10 @@ function main() {
     fs.mkdirSync(`${util.USER_DIR}/static`);
     fs.mkdirSync(`${util.USER_DIR}/static/css`);
     fs.mkdirSync(`${util.USER_DIR}/static/images`);
+    if(type == 'electron'){
+        let str = fs.readFileSync(`${util.PROJECT_DIR}/src/templates/main.js`).toString();
+        fs.writeFileSync(`${util.USER_DIR}/main.js`, str, 'utf8');
+    }
     console.log(chalk.green('工程文件创建完成!'));
     let list = {
         type: 'list',

@@ -73,8 +73,8 @@ if (snowConfig.analyzer) {
 let node = {};
 if(snowConfig.appType == 'electron'){
   node = {
-    __dirname: true,
-    __filename: true
+    __dirname: process.env.NODE_ENV == 'development',
+    __filename: process.env.NODE_ENV == 'development'
   }
 }
 /**

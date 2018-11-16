@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const util = require('../tool/util.js')
-
+const snowConfig = require(`${util.SNOW_PATH}`)
 let mainConfig = {
     entry: {
         main: path.join(util.USER_DIR, './main.js')
@@ -20,13 +20,13 @@ let mainConfig = {
         ]
     },
     node: {
-        __dirname: true,
-        __filename: true
+        __dirname: process.env.NODE_ENV == 'development',
+        __filename: process.env.NODE_ENV == 'development'
     },
     output: {
-        filename: '[name].js',
+        filename: '[name].bundle.js',
         libraryTarget: 'commonjs2',
-        path: path.join(util.USER_DIR, './output')
+        path: path.join(util.USER_DIR, `./${snowConfig.outputName}`)
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin()
