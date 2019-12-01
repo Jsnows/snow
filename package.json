@@ -1,11 +1,14 @@
 {
   "name": "snow",
-  "version": "2.1.0",
+  "version": "1.0.0",
   "description": "snow's command-line tools",
   "main": "./bin/cli.js",
   "scripts": {},
   "repository": {
     "type": "git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npm.alibaba-inc.com"
   },
   "keywords": [
     "snow"
