@@ -66,7 +66,7 @@ function main(type) {
             let ni = spawn('npm', ['install'], { stdio: 'inherit' });
             //监听关闭
             ni.on('close', (code) => {
-                console.log(chalk.green('安装完成'));
+                console.log(chalk.green('安装完成'));    
             });
         }
     })

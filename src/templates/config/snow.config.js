@@ -32,7 +32,7 @@ module.exports = {
 	// 打包资源的路径 '/'服务器路径 './'相对路径 （web应用使用/ electron使用./）
 	publicPath: '/',
 	// 需要打包的应用类型
-	appType: 'electron',
+	appType: 'web',
 	// electron打包配置
 	electronPackConfig: {
 		arch: 'x64',
