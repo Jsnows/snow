@@ -28,7 +28,7 @@
     "gulp-zip": "^4.0.0",
     "has-flag": "^2.0.0",
     "inquirer": "^3.1.1",
-    "morgan": "^1.8.2",
+    "morgan": "^1.9.1",
     "opn": "^5.1.0",
     "portfinder": "^1.0.13",
     "shelljs": "^0.7.8",
