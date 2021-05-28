@@ -32,7 +32,7 @@
     "opn": "^5.1.0",
     "portfinder": "^1.0.13",
     "shelljs": "^0.7.8",
-    "ws": "^6.1.0"
+    "ws": "^7.4.5"
   },
   "devDependencies": {
     "add-asset-html-webpack-plugin": "^2.0.1",
